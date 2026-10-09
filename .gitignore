@@ -8,3 +8,5 @@ pixelproof-report/
 .turbo/
 *.tgz
 examples/out-*/
+examples/demo-frames/
+examples/basic-ui/report/

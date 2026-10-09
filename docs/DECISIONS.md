@@ -63,6 +63,12 @@
 - **理由**：SPEC 要求 core 不依赖 Playwright/HTML；CLI 只做参数解析与退出码。
 - **影响**：对外推荐 `runCompare()`；`comparePrepared()` 保持纯计算、不写文件。`app` 只做编排与生命周期，不成通用 Service Framework。
 
+## Release process notes (D-010 … D-014)
+
+- **D-010**：首个本地 MVP commit 已批准并完成。
+- **D-011**：创建 GitHub 远程暂缓；需用户确认账号/组织/可见性。当前环境 `gh` 未登录。
+- **D-012**：OSS Hardening 顺序：npm pack → E2E → 离线 HTML → 安全边界 → examples/demo → 文档 → CI。
+- **D-014**：验收阶段不扩展新功能。
 
 ## 补充约定（写入 SPEC，非独立 ADR）
 

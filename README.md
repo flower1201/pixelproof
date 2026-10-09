@@ -2,23 +2,29 @@
 
 Local-first visual feedback for AI-generated web interfaces.
 
-Compare a design reference image against an actual screenshot, get a pixel diff, `result.json`, and (later) an interactive HTML report plus agent-oriented fix instructions.
+Compare a design reference against an actual screenshot or a local page URL. PixelProof writes an offline HTML report, `result.json`, and a rule-based `fix-instructions.md` checklist for coding agents.
 
-> Status: early development. Image-to-image compare, local loopback URL capture, offline HTML report, and rule-based fix-instructions are implemented. CI packaging/docs hardening is still in progress.
+![PixelProof demo](./examples/pixelproof-demo.gif)
+
+> Status: MVP usable locally. Image compare, loopback URL capture, offline HTML report, and rule-based fix instructions are implemented. GitHub remote / npm publish are not done yet.
 
 ## Requirements
 
 - Node.js `^22.12.0 || ^24.0.0`
 - npm
+- For URL mode: Chromium via Playwright (`npx playwright install chromium`)
 
 ## Install (local)
 
 ```bash
 npm install
+npx playwright install chromium   # only needed for --url
 npm run build
 ```
 
-## Usage (implemented)
+## Usage
+
+### Image-to-image
 
 ```bash
 node dist/cli/index.js compare \
@@ -27,17 +33,28 @@ node dist/cli/index.js compare \
   --out ./pixelproof-report
 ```
 
-## Usage (URL mode, loopback only)
+### Local URL (loopback only)
 
 ```bash
 node dist/cli/index.js compare \
   --target ./design.png \
-  --url http://localhost:3000 \
+  --url http://127.0.0.1:3000 \
   --viewport 1440x900 \
   --out ./pixelproof-report
 ```
 
-Requires Chromium via Playwright (`npx playwright install chromium`).
+Only `localhost`, `127.0.0.1`, and `[::1]` are accepted for `--url`.
+
+### Fixture demo
+
+```bash
+node dist/cli/index.js compare \
+  --target ./tests/fixtures/diff-a.png \
+  --actual ./tests/fixtures/diff-b.png \
+  --out ./examples/out-diff
+```
+
+Then open `examples/out-diff/index.html` in a browser.
 
 ## Output
 
@@ -57,11 +74,16 @@ pixelproof-report/
 npm test
 npm run typecheck
 npm run build
+npm run demo:gif          # regenerate examples/pixelproof-demo.gif
 ```
 
-## Spec
+## Docs
 
-See [`docs/PROJECT_SPEC.md`](./docs/PROJECT_SPEC.md) and [`docs/DECISIONS.md`](./docs/DECISIONS.md).
+- [`docs/PROJECT_SPEC.md`](./docs/PROJECT_SPEC.md) — engineering baseline
+- [`docs/DECISIONS.md`](./docs/DECISIONS.md) — ADRs
+- [`docs/CLI.md`](./docs/CLI.md) — CLI reference
+- [`docs/METRICS.md`](./docs/METRICS.md) — metric definitions
+- [`CONTRIBUTING.md`](./CONTRIBUTING.md)
 
 ## License
 

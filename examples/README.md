@@ -1,5 +1,20 @@
 # Examples
 
+Demo animation generated from a real report:
+
+![PixelProof demo](./pixelproof-demo.gif)
+
+Regenerate:
+
+```bash
+npm run build
+node dist/cli/index.js compare \
+  --target ./tests/fixtures/diff-a.png \
+  --actual ./tests/fixtures/diff-b.png \
+  --out ./examples/out-diff
+npm run demo:gif
+```
+
 ## Image-to-image
 
 From the repo root after `npm run build`:
