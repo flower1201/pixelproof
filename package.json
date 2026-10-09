@@ -1,6 +1,6 @@
 {
   "name": "pixelproof-cli",
-  "version": "0.1.0-rc.1",
+  "version": "0.1.0-rc.2",
   "description": "Compare AI-generated UIs against reference screenshots. Local-first visual diffs, offline reports, and agent-friendly feedback.",
   "type": "module",
   "bin": {

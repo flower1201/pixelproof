@@ -5,7 +5,7 @@ import type { CompareOptions, CompareResult } from '../../src/core/types.js';
 
 const result: CompareResult = {
   schemaVersion: '1.0',
-  engineVersion: '0.1.0-rc.1',
+  engineVersion: '0.1.0-rc.2',
   source: { kind: 'image', displayValue: 'x<script>.png' },
   image: { width: 10, height: 10 },
   metrics: {

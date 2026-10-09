@@ -6,7 +6,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const tgz = path.join(root, "pixelproof-cli-0.1.0-rc.1.tgz");
+const tgz = path.join(root, "pixelproof-cli-0.1.0-rc.2.tgz");
 const fixtures = path.join(root, "tests", "fixtures");
 
 function run(cmd, args, opts = {}) {
@@ -39,8 +39,8 @@ try {
   const ver = run("npx", ["pixelproof", "--version"], { cwd: tmp });
   const version = ver.stdout.trim();
   console.log("VERSION=" + version);
-  if (version !== "0.1.0-rc.1") {
-    throw new Error(`expected CLI version 0.1.0-rc.1, got ${version}`);
+  if (version !== "0.1.0-rc.2") {
+    throw new Error(`expected CLI version 0.1.0-rc.2, got ${version}`);
   }
 
   const imgOut = path.join(tmp, "out-img");
