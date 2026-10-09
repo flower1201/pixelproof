@@ -8,7 +8,7 @@ Compare a design reference against a screenshot or a local page URL. PixelProof 
 
 Local-first · No AI API required · Offline report · Loopback URL capture only
 
-> Status: local `v0.1.0-rc.1`. npm package name is `pixelproof-cli` (CLI binary remains `pixelproof`). GitHub remote and npm publish are not public yet.
+> Status: local `v0.1.0-rc.1`. npm package name is `pixelproof-cli` (CLI binary remains `pixelproof`). Target repo: [flower1201/pixelproof](https://github.com/flower1201/pixelproof). npm publish is not authorized yet.
 
 ## Quick start (from source)
 

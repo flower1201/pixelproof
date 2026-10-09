@@ -42,6 +42,14 @@
     "pixelmatch",
     "cli"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flower1201/pixelproof.git"
+  },
+  "homepage": "https://github.com/flower1201/pixelproof#readme",
+  "bugs": {
+    "url": "https://github.com/flower1201/pixelproof/issues"
+  },
   "publishConfig": {
     "access": "public",
     "tag": "next"
