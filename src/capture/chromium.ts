@@ -90,9 +90,10 @@ export async function capturePage(options: CaptureOptions): Promise<CaptureResul
         timeout: navigationTimeoutMs,
       });
     } catch (cause) {
+      const detail = cause instanceof Error ? cause.message : String(cause);
       throw new PixelProofError(
         'CAPTURE_ERROR',
-        `navigation failed for ${parsed.toString()}`,
+        `navigation failed for ${parsed.toString()}: ${detail}`,
         3,
         { cause },
       );

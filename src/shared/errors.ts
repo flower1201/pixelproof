@@ -72,9 +72,20 @@ export function toExitCode(error: unknown): ExitCode {
   return EXIT.USAGE;
 }
 
+function causeMessage(error: unknown): string | undefined {
+  if (!error || typeof error !== 'object' || !('cause' in error)) return undefined;
+  const cause = (error as { cause?: unknown }).cause;
+  if (cause instanceof Error) return cause.message;
+  if (cause !== undefined) return String(cause);
+  return undefined;
+}
+
 export function formatError(error: unknown): string {
   if (error instanceof PixelProofError) {
-    return `${error.code}: ${error.message}`;
+    const cause = causeMessage(error);
+    return cause
+      ? `${error.code}: ${error.message} (${cause})`
+      : `${error.code}: ${error.message}`;
   }
   if (error instanceof Error) {
     return `INTERNAL_ERROR: ${error.message}`;

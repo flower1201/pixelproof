@@ -70,6 +70,18 @@
 - **D-012**：OSS Hardening 顺序：npm pack → E2E → 离线 HTML → 安全边界 → examples/demo → 文档 → CI。
 - **D-014**：验收阶段不扩展新功能。
 
+## ADR-011 — CLI URL tests must not use spawnSync with in-process servers
+
+- **状态**：Accepted
+- **背景**：CLI 子进程对同进程 HTTP server 导航超时；同机 `runCompare` API 成功。
+- **根因**：`child_process.spawnSync` 阻塞父进程事件循环，导致同进程 HTTP server 无法 accept/respond。
+- **决定**：
+  1. 产品 CLI 无缺陷；用户场景（独立服务进程）正常。
+  2. 测试/脚本必须用异步 `spawn`，或把 fixture server 放到独立进程。
+  3. `playwright` / `sharp` 在 tsup 中标记为 `external`，运行时从 `node_modules` 解析。
+  4. `CAPTURE_ERROR` 必须包含底层 Playwright 原因字符串。
+- **验证**：独立 server 进程下 CLI URL 模式连续 5 次成功。
+
 ## 补充约定（写入 SPEC，非独立 ADR）
 
 - 默认 `threshold = 0.1`、`includeAA = false`（pixelmatch 语义：单像素阈值，不是整图 10% 差异）。

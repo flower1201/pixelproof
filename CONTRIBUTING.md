@@ -29,7 +29,12 @@ npm test
 npm run build
 npm test
 node dist/cli/index.js compare --help
+npm run example:basic-ui
 ```
+
+## Testing URL capture
+
+When spawning the CLI against a local fixture server **in the same Node process**, use async `spawn` (not `spawnSync`). `spawnSync` blocks the event loop and will starve the in-process HTTP server, causing false `CAPTURE_ERROR` navigation timeouts.
 
 ## Pull requests
 

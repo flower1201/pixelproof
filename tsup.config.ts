@@ -1,25 +1,27 @@
 import { defineConfig } from 'tsup';
 
+const shared = {
+  format: ['esm'] as const,
+  target: 'node22' as const,
+  platform: 'node' as const,
+  sourcemap: true,
+  splitting: false,
+  // Native / browser-driver packages must resolve from node_modules at runtime.
+  external: ['playwright', 'playwright-core', 'sharp'],
+};
+
 export default defineConfig([
   {
+    ...shared,
     entry: { index: 'src/index.ts' },
-    format: ['esm'],
-    target: 'node22',
-    platform: 'node',
     dts: true,
-    sourcemap: true,
     clean: true,
-    splitting: false,
   },
   {
+    ...shared,
     entry: { 'cli/index': 'src/cli/index.ts' },
-    format: ['esm'],
-    target: 'node22',
-    platform: 'node',
     dts: false,
-    sourcemap: true,
     clean: false,
-    splitting: false,
     banner: {
       js: '#!/usr/bin/env node',
     },
