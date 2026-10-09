@@ -82,6 +82,17 @@
   4. `CAPTURE_ERROR` 必须包含底层 Playwright 原因字符串。
 - **验证**：独立 server 进程下 CLI URL 模式连续 5 次成功。
 
+## ADR-012 — npm package name vs GitHub repo name
+
+- **状态**：Accepted（RC Tag Authorization）
+- **背景**：`npm view pixelproof` 显示已有 `0.5.0`；GitHub 仓库名与 npm 包名不是同一命名空间。
+- **决定**：
+  1. GitHub 仓库名保持 `pixelproof`（待用户授权后创建）。
+  2. npm 包名采用 `pixelproof-cli`（Registry HEAD 返回 404；备用名 `visual-pixelproof` 亦为 404）。
+  3. CLI bin 仍为 `pixelproof`（`npx pixelproof` / 全局 `pixelproof`）。
+  4. RC 版本号 `0.1.0-rc.1`；本地附注 Tag `v0.1.0-rc.1`；当前不 Push、不 npm publish。
+- **影响**：文档与 `package.json`/`package-lock.json` 同步包名；不修改核心比较算法。
+
 ## 补充约定（写入 SPEC，非独立 ADR）
 
 - 默认 `threshold = 0.1`、`includeAA = false`（pixelmatch 语义：单像素阈值，不是整图 10% 差异）。

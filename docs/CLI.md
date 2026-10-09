@@ -1,5 +1,7 @@
 # PixelProof CLI
 
+npm package: `pixelproof-cli` · binary: `pixelproof`
+
 ```bash
 pixelproof compare --target <file> (--actual <file> | --url <address>) [options]
 ```

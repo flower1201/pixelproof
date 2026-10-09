@@ -6,7 +6,7 @@ Compare a design reference against an actual screenshot or a local page URL. Pix
 
 ![PixelProof demo](./examples/pixelproof-demo.gif)
 
-> Status: MVP usable locally. Image compare, loopback URL capture, offline HTML report, and rule-based fix instructions are implemented. GitHub remote / npm publish are not done yet.
+> Status: `v0.1.0-rc.1` local release candidate. npm package name is `pixelproof-cli` (CLI bin remains `pixelproof`). GitHub remote / npm publish are not done yet.
 
 ## Requirements
 
@@ -22,12 +22,14 @@ npx playwright install chromium   # only needed for --url
 npm run build
 ```
 
+After publish (not yet): `npm i -g pixelproof-cli` then run `pixelproof`, or `npx pixelproof-cli`.
+
 ## Usage
 
 ### Image-to-image
 
 ```bash
-node dist/cli/index.js compare \
+pixelproof compare \
   --target ./design.png \
   --actual ./screenshot.png \
   --out ./pixelproof-report
@@ -36,7 +38,7 @@ node dist/cli/index.js compare \
 ### Local URL (loopback only)
 
 ```bash
-node dist/cli/index.js compare \
+pixelproof compare \
   --target ./design.png \
   --url http://127.0.0.1:3000 \
   --viewport 1440x900 \
@@ -45,10 +47,12 @@ node dist/cli/index.js compare \
 
 Only `localhost`, `127.0.0.1`, and `[::1]` are accepted for `--url`.
 
+From a local checkout before linking the bin, use `node dist/cli/index.js` with the same arguments.
+
 ### Fixture demo
 
 ```bash
-node dist/cli/index.js compare \
+pixelproof compare \
   --target ./tests/fixtures/diff-a.png \
   --actual ./tests/fixtures/diff-b.png \
   --out ./examples/out-diff

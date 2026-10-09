@@ -7,6 +7,7 @@ pixelproof-report/
 .tmp/
 .turbo/
 *.tgz
+scripts/.last-pack-verify.json
 examples/out-*/
 examples/demo-frames/
 examples/basic-ui/report/
