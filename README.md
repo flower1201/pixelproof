@@ -2,64 +2,88 @@
 
 **Visual feedback for AI-generated interfaces.**
 
-Compare a design reference against a screenshot or a local page URL. PixelProof writes an offline HTML report, `result.json`, and a rule-based `fix-instructions.md` checklist for coding agents.
+Compare a design reference against a screenshot or a local page URL. PixelProof writes an offline HTML report, `result.json`, and a rule-based `fix-instructions.md` checklist for coding agents — so AI coding tools get machine-readable visual feedback, not just another screenshot folder.
 
 ![PixelProof demo](./examples/pixelproof-demo.gif)
 
-Local-first · No AI API required · Offline report · Loopback URL capture only
+Local-first · No AI API required · Offline HTML report · Loopback URL capture only
 
-> Status: public repo [flower1201/pixelproof](https://github.com/flower1201/pixelproof). npm package name is `pixelproof-cli` (CLI binary remains `pixelproof`). Preparing GitHub Pre-release `v0.1.0-rc.2`; npm publish is not authorized yet.
+> **Public beta:** GitHub Pre-release [`v0.1.0-rc.2`](https://github.com/flower1201/pixelproof/releases/tag/v0.1.0-rc.2) is available. npm package name will be `pixelproof-cli` (CLI binary: `pixelproof`). **Not published to npm yet.**
 
-## Quick start (from source)
+## Why PixelProof (vs generic screenshot diff)
 
-Requires Node.js `^22.12.0 || ^24.0.0`.
+- Built for **AI coding workflows**: deterministic `fix-instructions.md` + JSON metrics agents can read
+- **Local-first**: no cloud upload, no LLM API key
+- **Strict by default**: fail-fast on size mismatch (no silent resize)
+- Offline interactive report: Before / After / Overlay / Diff
+
+PixelProof measures pixel difference. It does **not** auto-locate CSS/DOM root causes or apply fixes.
+
+## Quick start — zero-setup demo (from source)
+
+Requires Node.js `^22.12.0 || ^24.0.0`. Uses built-in fixtures (no design files needed).
 
 ```bash
+git clone https://github.com/flower1201/pixelproof.git
+cd pixelproof
 npm install
 npm run build
-npx playwright install chromium   # only needed for --url
+npm run demo
 ```
 
-Image compare:
+Open `examples/out-demo/index.html` in a browser. You should see Before/After, Overlay, Diff, plus `result.json` and `fix-instructions.md` in the same folder.
+
+## Quick start — install from GitHub Release (no clone of source tree for the CLI)
+
+Verified on Windows with Node 24. Download the Pre-release tarball, install it, then compare any two same-size images (fixtures below are optional):
 
 ```bash
-node dist/cli/index.js compare \
+# download release asset
+curl -L -o pixelproof-cli.tgz \
+  https://github.com/flower1201/pixelproof/releases/download/v0.1.0-rc.2/pixelproof-cli-0.1.0-rc.2.tgz
+
+npm install ./pixelproof-cli.tgz
+npx pixelproof --version   # 0.1.0-rc.2
+
+# optional: fixture images from the repo (no Chromium needed for image mode)
+curl -L -o design.png \
+  https://raw.githubusercontent.com/flower1201/pixelproof/main/tests/fixtures/diff-a.png
+curl -L -o actual.png \
+  https://raw.githubusercontent.com/flower1201/pixelproof/main/tests/fixtures/diff-b.png
+
+npx pixelproof compare \
+  --target ./design.png \
+  --actual ./actual.png \
+  --out ./pixelproof-report
+```
+
+Open `pixelproof-report/index.html`.
+
+For `--url` mode you also need Chromium:
+
+```bash
+npx playwright install chromium
+```
+
+Only loopback hosts are accepted: `localhost`, `127.0.0.1`, `[::1]`.
+
+## Your own screenshots
+
+```bash
+npx pixelproof compare \
   --target ./design.png \
   --actual ./screenshot.png \
   --out ./pixelproof-report
 ```
 
-Local URL (loopback only: `localhost`, `127.0.0.1`, `[::1]`):
+Or against a local page (after `npm run build` in a source checkout, or via the installed CLI):
 
 ```bash
-node dist/cli/index.js compare \
+npx pixelproof compare \
   --target ./design.png \
   --url http://127.0.0.1:3000 \
   --viewport 1440x900 \
   --out ./pixelproof-report
-```
-
-Open `pixelproof-report/index.html` in a browser for Before/After, Overlay, and Diff.
-
-Fixture smoke test:
-
-```bash
-node dist/cli/index.js compare \
-  --target ./tests/fixtures/diff-a.png \
-  --actual ./tests/fixtures/diff-b.png \
-  --out ./examples/out-diff
-```
-
-## After npm publish (not yet)
-
-Package name will be `pixelproof-cli`; the CLI command stays `pixelproof`.
-
-```bash
-npm i -g pixelproof-cli
-pixelproof compare --target ./design.png --actual ./shot.png --out ./pixelproof-report
-
-# or
-npx pixelproof-cli compare --target ./design.png --actual ./shot.png --out ./pixelproof-report
 ```
 
 ## Output
@@ -76,12 +100,20 @@ pixelproof-report/
 
 `mismatchRatio` / pixel match numbers measure pixel difference against the reference. They are **not** a design-quality score.
 
+## After npm publish (not yet)
+
+```bash
+npm i -g pixelproof-cli
+pixelproof compare --target ./design.png --actual ./shot.png --out ./pixelproof-report
+```
+
 ## Development
 
 ```bash
 npm test
 npm run typecheck
 npm run build
+npm run demo              # fixture compare → examples/out-demo
 npm run demo:gif          # regenerate examples/pixelproof-demo.gif
 ```
 
@@ -89,6 +121,7 @@ npm run demo:gif          # regenerate examples/pixelproof-demo.gif
 
 - [`docs/CLI.md`](./docs/CLI.md) — CLI reference
 - [`docs/METRICS.md`](./docs/METRICS.md) — metric definitions
+- [`docs/LAUNCH_KIT.md`](./docs/LAUNCH_KIT.md) — launch / community prep notes
 - [`docs/PROJECT_SPEC.md`](./docs/PROJECT_SPEC.md) — engineering baseline
 - [`docs/DECISIONS.md`](./docs/DECISIONS.md) — ADRs
 - [`CONTRIBUTING.md`](./CONTRIBUTING.md)

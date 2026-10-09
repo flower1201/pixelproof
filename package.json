@@ -29,6 +29,7 @@
     "test:watch": "vitest",
     "dev": "tsup --watch",
     "pixelproof": "node ./dist/cli/index.js",
+    "demo": "node ./dist/cli/index.js compare --target ./tests/fixtures/diff-a.png --actual ./tests/fixtures/diff-b.png --out ./examples/out-demo",
     "demo:gif": "node scripts/make-demo-gif.mjs",
     "example:basic-ui": "node scripts/example-basic-ui.mjs"
   },
