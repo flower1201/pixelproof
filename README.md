@@ -1,64 +1,66 @@
 # PixelProof
 
-Local-first visual feedback for AI-generated web interfaces.
+**Visual feedback for AI-generated interfaces.**
 
-Compare a design reference against an actual screenshot or a local page URL. PixelProof writes an offline HTML report, `result.json`, and a rule-based `fix-instructions.md` checklist for coding agents.
+Compare a design reference against a screenshot or a local page URL. PixelProof writes an offline HTML report, `result.json`, and a rule-based `fix-instructions.md` checklist for coding agents.
 
 ![PixelProof demo](./examples/pixelproof-demo.gif)
 
-> Status: `v0.1.0-rc.1` local release candidate. npm package name is `pixelproof-cli` (CLI bin remains `pixelproof`). GitHub remote / npm publish are not done yet.
+Local-first · No AI API required · Offline report · Loopback URL capture only
 
-## Requirements
+> Status: local `v0.1.0-rc.1`. npm package name is `pixelproof-cli` (CLI binary remains `pixelproof`). GitHub remote and npm publish are not public yet.
 
-- Node.js `^22.12.0 || ^24.0.0`
-- npm
-- For URL mode: Chromium via Playwright (`npx playwright install chromium`)
+## Quick start (from source)
 
-## Install (local)
+Requires Node.js `^22.12.0 || ^24.0.0`.
 
 ```bash
 npm install
-npx playwright install chromium   # only needed for --url
 npm run build
+npx playwright install chromium   # only needed for --url
 ```
 
-After publish (not yet): `npm i -g pixelproof-cli` then run `pixelproof`, or `npx pixelproof-cli`.
-
-## Usage
-
-### Image-to-image
+Image compare:
 
 ```bash
-pixelproof compare \
+node dist/cli/index.js compare \
   --target ./design.png \
   --actual ./screenshot.png \
   --out ./pixelproof-report
 ```
 
-### Local URL (loopback only)
+Local URL (loopback only: `localhost`, `127.0.0.1`, `[::1]`):
 
 ```bash
-pixelproof compare \
+node dist/cli/index.js compare \
   --target ./design.png \
   --url http://127.0.0.1:3000 \
   --viewport 1440x900 \
   --out ./pixelproof-report
 ```
 
-Only `localhost`, `127.0.0.1`, and `[::1]` are accepted for `--url`.
+Open `pixelproof-report/index.html` in a browser for Before/After, Overlay, and Diff.
 
-From a local checkout before linking the bin, use `node dist/cli/index.js` with the same arguments.
-
-### Fixture demo
+Fixture smoke test:
 
 ```bash
-pixelproof compare \
+node dist/cli/index.js compare \
   --target ./tests/fixtures/diff-a.png \
   --actual ./tests/fixtures/diff-b.png \
   --out ./examples/out-diff
 ```
 
-Then open `examples/out-diff/index.html` in a browser.
+## After npm publish (not yet)
+
+Package name will be `pixelproof-cli`; the CLI command stays `pixelproof`.
+
+```bash
+npm i -g pixelproof-cli
+pixelproof compare --target ./design.png --actual ./shot.png --out ./pixelproof-report
+
+# or
+npx pixelproof-cli compare --target ./design.png --actual ./shot.png --out ./pixelproof-report
+```
 
 ## Output
 
@@ -72,6 +74,8 @@ pixelproof-report/
 └── fix-instructions.md   # rule-based agent checklist
 ```
 
+`mismatchRatio` / pixel match numbers measure pixel difference against the reference. They are **not** a design-quality score.
+
 ## Development
 
 ```bash
@@ -83,11 +87,12 @@ npm run demo:gif          # regenerate examples/pixelproof-demo.gif
 
 ## Docs
 
-- [`docs/PROJECT_SPEC.md`](./docs/PROJECT_SPEC.md) — engineering baseline
-- [`docs/DECISIONS.md`](./docs/DECISIONS.md) — ADRs
 - [`docs/CLI.md`](./docs/CLI.md) — CLI reference
 - [`docs/METRICS.md`](./docs/METRICS.md) — metric definitions
+- [`docs/PROJECT_SPEC.md`](./docs/PROJECT_SPEC.md) — engineering baseline
+- [`docs/DECISIONS.md`](./docs/DECISIONS.md) — ADRs
 - [`CONTRIBUTING.md`](./CONTRIBUTING.md)
+- [`SECURITY.md`](./SECURITY.md)
 
 ## License
 

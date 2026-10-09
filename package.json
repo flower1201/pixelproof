@@ -1,7 +1,7 @@
 {
   "name": "pixelproof-cli",
   "version": "0.1.0-rc.1",
-  "description": "Local-first visual feedback for AI-generated web interfaces",
+  "description": "Compare AI-generated UIs against reference screenshots. Local-first visual diffs, offline reports, and agent-friendly feedback.",
   "type": "module",
   "bin": {
     "pixelproof": "./dist/cli/index.js"
@@ -34,11 +34,18 @@
   },
   "keywords": [
     "visual-regression",
+    "playwright",
+    "ai-coding",
+    "screenshot-diff",
+    "developer-tools",
+    "typescript",
     "pixelmatch",
-    "screenshot",
-    "cli",
-    "ai-coding"
+    "cli"
   ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
+  },
   "license": "MIT",
   "dependencies": {
     "commander": "^13.1.0",

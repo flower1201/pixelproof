@@ -1,0 +1,30 @@
+name: Bug report
+description: Report a PixelProof bug
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. Please include commands and exit codes when possible.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Expected vs actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: Exact CLI command(s), Node version, OS
+      placeholder: |
+        node -v
+        pixelproof compare --target ... --actual ... --out ...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / exit code
+      render: shell
