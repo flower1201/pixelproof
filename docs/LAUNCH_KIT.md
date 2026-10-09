@@ -7,7 +7,9 @@ Materials for first real-user trials. **Do not auto-post** to Reddit, Hacker New
 - Repository: https://github.com/flower1201/pixelproof
 - Pre-release: https://github.com/flower1201/pixelproof/releases/tag/v0.1.0-rc.2
 - Issues: https://github.com/flower1201/pixelproof/issues
-- npm: **not published** (package name reserved as `pixelproof-cli`)
+- Phase 1 feedback pack: [BETA_FEEDBACK.md](./BETA_FEEDBACK.md)
+- Community drafts (manual only): [COMMUNITY_DRAFTS.md](./COMMUNITY_DRAFTS.md)
+- npm package: **not yet published**; name availability (`pixelproof-cli`) to be rechecked before publishing
 
 ## Core pitch
 
@@ -15,7 +17,7 @@ PixelProof is a **local-first** CLI that compares a design reference to a screen
 
 ## Demo (copy-paste)
 
-Zero-setup from source (fixtures included):
+From source (fixtures included — no design files or API keys needed):
 
 ```bash
 git clone https://github.com/flower1201/pixelproof.git

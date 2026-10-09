@@ -19,9 +19,11 @@ Local-first · No AI API required · Offline HTML report · Loopback URL capture
 
 PixelProof measures pixel difference. It does **not** auto-locate CSS/DOM root causes or apply fixes.
 
-## Quick start — zero-setup demo (from source)
+## Quick start — try the included demo
 
-Requires Node.js `^22.12.0 || ^24.0.0`. Uses built-in fixtures (no design files needed).
+**Try the included demo — no design files or API keys needed.**
+
+Requires Node.js `^22.12.0 || ^24.0.0`. Still needs `git clone`, `npm install`, and `npm run build` (not a one-command install). Built-in fixtures mean you do not bring your own design PNGs.
 
 ```bash
 git clone https://github.com/flower1201/pixelproof.git
