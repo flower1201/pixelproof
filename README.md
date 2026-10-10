@@ -119,6 +119,10 @@ npm run demo              # fixture compare → examples/out-demo
 npm run demo:gif          # regenerate examples/pixelproof-demo.gif
 ```
 
+## Feedback
+
+Looking for people who ship front-end with Cursor / similar tools to try `npm run demo` and say whether install + the report are useful. Use [Discussions](https://github.com/flower1201/pixelproof/discussions/2) or [Issues](https://github.com/flower1201/pixelproof/issues). No need to Star.
+
 ## Docs
 
 - [`docs/CLI.md`](./docs/CLI.md) — CLI reference
