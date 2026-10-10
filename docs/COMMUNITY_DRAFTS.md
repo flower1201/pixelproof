@@ -49,3 +49,11 @@ cd pixelproof && npm install && npm run build && npm run demo
 Local CLI for AI coding UIs: design PNG vs screenshot → offline report + agent checklist. No cloud, no API keys.  
 https://github.com/flower1201/pixelproof  
 `npm run demo` after clone/build. Looking for real install + report feedback (not stars).
+
+## 发帖前自检（2026-10-10 本机已验）
+
+- [x] Release `pixelproof-cli-0.1.0-rc.2.tgz` → `npm install` → `--version 0.1.0-rc.2`（Win / Node 24）
+- [x] `compare` 同尺寸 fixture → HTML + `result.json` + `fix-instructions.md`
+- [ ] 你本人再跑一遍 `npm run demo` 确认 GIF / out-demo 仍在
+- [ ] 文案未声称「已 npm publish」
+- [ ] 已准备好回答 vs 裸 pixelmatch 的差异（Agent checklist + 离线报告）
